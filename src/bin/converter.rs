@@ -6,9 +6,9 @@ use std::io::{self, BufReader, BufWriter, Read, Write};
 
 #[derive(Debug, Clone, ValueEnum)]
 enum Format {
-    Binary,
+    Bin,
     Csv,
-    Text,
+    Txt,
 }
 
 #[derive(Parser)]
@@ -35,12 +35,12 @@ fn main() {
 fn run() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
 
-    // Read operations
+    // Читаем с файла
     let file = File::open(&args.input)?;
     let reader = BufReader::new(file);
     let operations = parse_input(reader, &args.input_format)?;
 
-    // Write operations to stdout
+    // Пишем сразу в stdout
     let stdout = io::stdout();
     let writer = BufWriter::new(stdout.lock());
     write_output(writer, &operations, &args.output_format)?;
@@ -50,9 +50,9 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
 
 fn parse_input<R: Read>(reader: R, format: &Format) -> Result<HashSet<Operation>, ParseError> {
     match format {
-        Format::Binary => bin_format::parse_all(reader),
+        Format::Bin => bin_format::parse_all(reader),
         Format::Csv => csv_format::parse_all(reader),
-        Format::Text => text_format::parse_all(reader),
+        Format::Txt => text_format::parse_all(reader),
     }
 }
 
@@ -62,8 +62,8 @@ fn write_output<W: Write>(
     format: &Format,
 ) -> Result<(), ParseError> {
     match format {
-        Format::Binary => bin_format::write_all(writer, operations),
+        Format::Bin => bin_format::write_all(writer, operations),
         Format::Csv => csv_format::write_all(writer, operations),
-        Format::Text => text_format::write_all(writer, operations),
+        Format::Txt => text_format::write_all(writer, operations),
     }
 }
