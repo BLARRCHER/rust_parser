@@ -39,12 +39,18 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
 
     // Read first file
-    let file1 = File::open(&args.file1)?;
+    let file1 = File::open(&args.file1).map_err(|err| {
+        eprintln!("Can't open file1 by specific path: {}", &args.file1);
+        err
+    })?;
     let reader1 = BufReader::new(file1);
     let operations1 = parse_file(reader1, &args.format1)?;
 
     // Read second file
-    let file2 = File::open(&args.file2)?;
+    let file2 = File::open(&args.file2).map_err(|err| {
+        eprintln!("Can't open file2 by specific path: {}", &args.file2);
+        err
+    })?;
     let reader2 = BufReader::new(file2);
     let operations2 = parse_file(reader2, &args.format2)?;
 

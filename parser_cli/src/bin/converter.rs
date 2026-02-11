@@ -36,7 +36,10 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
 
     // Читаем с файла
-    let file = File::open(&args.input)?;
+    let file = File::open(&args.input).map_err(|err| {
+        eprintln!("Can't open file by specific path: {}", &args.input);
+        err
+    })?;
     let reader = BufReader::new(file);
     let operations = parse_input(reader, &args.input_format)?;
 

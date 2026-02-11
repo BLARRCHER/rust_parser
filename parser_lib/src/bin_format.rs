@@ -3,7 +3,7 @@ use crate::operation::{Operation, OperationStatus, OperationType};
 use std::collections::HashSet;
 use std::io::{Read, Write};
 
-const MAGIC: [u8; 4] = [0x59, 0x50, 0x42, 0x4E]; // магическое 'YPBN'
+const MAGIC: [u8; 4] = [b'Y', b'P', b'B', b'N']; // магическое 'YPBN'
 
 /// Походили по бинарнику и собираем операцию по отступам
 pub fn parse_operation<R: Read>(reader: &mut R) -> Result<Operation> {
