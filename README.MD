@@ -1,12 +1,12 @@
 # rust_parser
 
-Библиотека (crate) для парсинга/сериализации/десериализации финансовых данных в несколько форматов и отдельные исполняемые cli приложения (comparer, converter), использующие данную библиотеку. 
-Поддерживаемые форматы: 
-1. csv - Таблица банковских операций
-2. txt - Текстовый формат описания списка операций
-3. bin - Бинарное предоставление списка операций
+A library (crate) for parsing/serializing/deserializing financial data into several formats, plus separate CLI executables (comparer, converter) that use this library.
+Supported formats:
+1. csv - a table of bank operations
+2. txt - a text format describing a list of operations
+3. bin - a binary representation of a list of operations
 
-# Пример запуска
-1. Тесты - "cargo test"
-2. Запуск comparer - "cargo run --bin comparer -- --file1 records_example.bin --format1 bin --file2 records_example.txt --format2 txt"
-3. Запуск converter - "cargo run --bin converter -- --input records_example.bin --input-format bin --output-format txt"
+# Usage examples
+1. Tests - `cargo test`
+2. Run comparer - `cargo run --bin comparer -- --file1 records_example.bin --format1 bin --file2 records_example.txt --format2 txt`
+3. Run converter - `cargo run --bin converter -- --input records_example.bin --input-format bin --output-format txt`
